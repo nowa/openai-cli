@@ -794,8 +794,7 @@ dependencies = [
 [[package]]
 name = "openai-rust"
 version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e76273bf68473462f412c4985b729a61f44cfac979cf8fd1d3882c1f3d749dd"
+source = "git+https://github.com/nowa/openai-rust#72b6689f70ec57ebb71072a3e0b01f0e38f0d173"
 dependencies = [
  "anyhow",
  "bytes",

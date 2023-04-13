@@ -20,6 +20,9 @@ struct Args {
     /// Your API key
     #[arg(short, long, required = true, env = "OPENAI_API_KEY")]
     api_key: String,
+
+    #[arg(long, required = false, default_value = "api.openai.com")]
+    api_host: String,
     
     /// Use vim keybinds (instead of emacs)
     #[arg(short, long)]
@@ -71,7 +74,14 @@ impl reedline::Prompt for State {
 #[tokio::main]
 async fn main() {
     let args = Args::parse();
-    let client = openai_rust::Client::new(&args.api_key);
+    // Wrap api host to Option
+    let api_host = if args.api_host.is_empty() {
+        None
+    } else {
+        Some(args.api_host)
+    };
+
+    let client = openai_rust::Client::new(&args.api_key, api_host);
 
     let mut state = State {
         name_of_prompt: None,
